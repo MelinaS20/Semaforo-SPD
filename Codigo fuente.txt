@@ -1,0 +1,66 @@
+#define LED_ROJO_UNO 12
+#define LED_ROJO_DOS 11
+#define LED_AMARILLO_UNO 10
+#define LED_AMARILLO_DOS 9
+#define LED_VERDE_UNO 8
+#define LED_VERDE_DOS 7
+#define BUZZER_UNO 5
+
+#define tiempo_rojo 5000
+#define tiempo_amarillo 3000
+#define tiempo_verde 5000
+
+
+void PrenderApagar();
+
+void setup()
+{
+  pinMode(LED_ROJO_UNO, OUTPUT);
+  pinMode(LED_ROJO_DOS, OUTPUT);
+  pinMode(LED_AMARILLO_UNO, OUTPUT);
+  pinMode(LED_AMARILLO_DOS, OUTPUT);
+  pinMode(LED_VERDE_UNO, OUTPUT);
+  pinMode(LED_VERDE_DOS, OUTPUT);
+  pinMode(BUZZER_UNO, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+	PrenderApagar(LED_VERDE_UNO, tiempo_verde);
+	PrenderApagar(LED_AMARILLO_UNO, tiempo_amarillo);
+    PrenderBuzzer(BUZZER_UNO);
+}
+void PrenderApagar(int led, int tiempo)
+{
+ 	digitalWrite(led, HIGH);
+  	if (led == LED_AMARILLO_UNO)
+    {
+      Serial.println("Encendio: Led amarillo");
+    }
+    else
+    {
+      if (led == LED_VERDE_UNO);
+      {
+        Serial.println("Encendio: Led verde");
+      }
+    }
+    
+    delay(tiempo);
+    digitalWrite(led,LOW);
+}
+
+void PrenderBuzzer(int buzzer)
+  {
+   Serial.println("Encendio: led rojo y buzzer");
+   	int i;
+	digitalWrite(LED_ROJO_UNO, HIGH);
+ 	 for (i = 0; i < 4;i++)
+ 	 {
+   		 tone(buzzer, 1000,450);
+         delay(500);
+   		 tone(buzzer, 1000,450);
+   	     delay(500);
+  	 }
+     digitalWrite(LED_ROJO_UNO, LOW);
+  }
